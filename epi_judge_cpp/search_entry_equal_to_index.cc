@@ -5,8 +5,20 @@
 using std::vector;
 
 int SearchEntryEqualToItsIndex(const vector<int>& A) {
-  // TODO - you fill in here.
-  return 0;
+    int left = 0, right = A.size() - 1;
+
+    while (left <= right) {
+        int mid = left + ((right - left) / 2);
+
+        if (A[mid] < mid)       // search right
+            left = mid + 1;
+        else if (A[mid] == mid) // found entry equal to index
+            return mid;
+        else                    // search left
+            right = mid - 1;
+    }
+
+    return -1;
 }
 void SearchEntryEqualToItsIndexWrapper(TimedExecutor& executor,
                                        const vector<int>& A) {

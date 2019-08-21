@@ -1,10 +1,26 @@
 #include <string>
+#include <cctype>
 #include "test_framework/generic_test.h"
 using std::string;
 
 bool IsPalindrome(const string& s) {
-  // TODO - you fill in here.
-  return true;
+    int i = 0, j = s.size() - 1;
+
+    while (i < j) {
+        // Advance indices to next alphabetic character
+        while (!isalnum(s[i]) && i < j)
+            i++;
+
+        while (!isalnum(s[j]) && i < j)
+            j--;
+
+        // Case sensitive
+        if (tolower(s[i++]) != tolower(s[j--]))
+            return false;
+    }
+
+    // String is palindrome
+    return true;
 }
 
 int main(int argc, char* argv[]) {
